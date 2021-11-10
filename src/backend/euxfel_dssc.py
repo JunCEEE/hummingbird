@@ -17,14 +17,6 @@ import ipc
 import karabo_bridge
 import numpy
 
-# from hummingbird import parse_cmdline_args
-# _argparser = None
-# def add_cmdline_args():
-#     global _argparser
-#     from utils.cmdline_args import argparser
-#     _argparser = argparser
-#     ## ADD EuXFEL specific parser arguments here ##
-
 MAX_TRAIN_LENGTH = 352
 
 class EUxfelTranslator(object):
@@ -32,10 +24,6 @@ class EUxfelTranslator(object):
     def __init__(self, state):
         self.timestamps = None
         self.library = 'karabo_bridge'
-
-        # parse additional arguments
-
-        # cmdline_args = _argparser.parse_args()
 
         # Read the main data source, e.g. AGIPD
         if 'EuXFEL/DataSource' in state:
@@ -168,7 +156,6 @@ class EUxfelTranslator(object):
         # self._s2c["SQS_NQS_PNCCD1MP/CAL/PNCCD_FMT-1:output"] = "pnCCD"
         
         self._s2c["SA3_XTD10_XGM/XGM/DOOCS:output"] = "GMD"
-        ## Add more AGIPD sources here
 
     def append_slow_data(self, buf, meta):
         """Append slow data to train buffer"""
