@@ -9,7 +9,7 @@ import utils.array
 
 
 histories = {}
-def plotHistory(param, label='', history=100, hline=None, runningHistogram=False, window=20, bins=100, hmin=0, hmax=100, name_extension="", name=None, group=None, **kwargs):
+def plotHistory(param, label='', history=100, hline=None, runningHistogram=False, window=20, bins=100, hmin=0, hmax=100, name_extension="", name=None, group=None, scale=None, **kwargs):
     """Plotting history of a parameter.
 
     Args:
@@ -32,7 +32,10 @@ def plotHistory(param, label='', history=100, hline=None, runningHistogram=False
             data_type = 'scalar'
             ipc.broadcast.init_data(name, data_type=data_type, ylabel=label, history_length=history, hline=hline, group=group, **kwargs)
         histories[param.name] = True
-    ipc.new_data(name, param.data, hline=hline, **kwargs)
+    if scale is None:
+        ipc.new_data(name, param.data, hline=hline, **kwargs)
+    else:
+        ipc.new_data(name, param.data*scale, hline=hline, **kwargs)
 
 def plotTimestamp(timestamp, name=None, group=None, **kwargs):
     if name is None:
